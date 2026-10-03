@@ -33,4 +33,4 @@ Ogni verifica segue lo stesso processo, tracciabile e basato su evidenze:
 
 ## Contatti
 
-*(email / LinkedIn / sito web)*
+alittera@gmail.com

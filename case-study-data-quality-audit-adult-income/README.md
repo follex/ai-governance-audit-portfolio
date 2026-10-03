@@ -1,36 +1,42 @@
-# AI Governance Audit — Portfolio
+# Data Quality Audit — Adult Income Dataset
 
-Raccolta di case study su verifiche indipendenti di sistemi di intelligenza artificiale (data quality, fairness, explainability, robustness, documentazione), condotte secondo un metodo strutturato e allineato a EU AI Act (Reg. UE 2024/1689), NIST AI RMF e ISO/IEC 42001.
+Verifica indipendente della qualità e rappresentatività del dato in ingresso, condotta come precondizione a qualunque controllo successivo (fairness, explainability) su un modello addestrato su questi dati.
 
-Ogni case study è realizzato su modelli e dataset pubblici, a scopo dimostrativo del metodo. Per ciascuno sono disponibili i deliverable prodotti (report, registro delle evidenze, working paper di test), nello stesso formato usato in un incarico reale.
+*Case study realizzato su dataset pubblico (UCI Machine Learning Repository), a scopo dimostrativo del metodo.*
 
-> Il codice di analisi non è pubblicato in questo repository: fa parte del know-how professionale utilizzato per produrre i risultati. Ogni case study documenta comunque, in modo dettagliato, gli strumenti impiegati e il metodo seguito.
+## Contesto
 
-## Chi sono
-
-Alessandro Littera, AI Auditor indipendente specializzato in conformità, governance e gestione del rischio dei sistemi di intelligenza artificiale — EU AI Act, ISO/IEC 42001, ISO/IEC 23894, GDPR applicato a sistemi AI.
-
-## Case study
-
-| Case study | Cosa verifica | Modello/dataset |
-|---|---|---|
-| [Data Quality Audit — Adult Income](./case-study-data-quality-audit-adult-income) | Completezza, duplicati, rappresentatività, sbilanciamento del target | Adult Income Dataset (UCI) |
-| Fairness Audit — COMPAS *(in arrivo)* | Demographic Parity, Equalized Odds, False Positive Rate per gruppo | COMPAS two-years (ProPublica) |
-| Explainability Audit — Titanic *(in arrivo)* | Spiegabilità globale e locale (SHAP, LIME) | Titanic (Kaggle) |
-| Robustness Audit — MNIST *(in arrivo)* | Robustezza a rumore e ad attacco avversariale (FGSM) | MNIST |
-| Bias & Robustness Audit NLP — DistilBERT *(in arrivo)* | Bias su gruppi demografici, stabilità a perturbazioni testuali | DistilBERT (sentiment analysis) |
-| Audit end-to-end — German Credit *(in arrivo)* | Verifica completa multi-asse, simulazione di incarico reale | German Credit Dataset (Statlog) |
+| | |
+|---|---|
+| Sistema analizzato | Modello tabellare di classificazione binaria (reddito annuo ≤/> 50.000$) |
+| Dataset | Adult Income / Census Income Dataset — UCI ML Repository, 32.561 osservazioni, 15 variabili |
+| Decisione supportata (nel dominio originale) | Predizione di soglia di reddito — proxy di decisioni reali come idoneità a credito o benefit |
+| Riferimento normativo | Art. 10, Regolamento UE 2024/1689 (EU AI Act) — requisiti di rappresentatività, completezza e assenza di errori dei dataset di addestramento |
 
 ## Metodo
 
-Ogni verifica segue lo stesso processo, tracciabile e basato su evidenze:
+Verifica condotta su quattro assi:
 
-1. Inquadramento del sistema (tipo, decisione supportata, soggetti impattati, accesso disponibile, livello di rischio)
-2. Pianificazione dei controlli e dei criteri di riferimento
-3. Esecuzione di test tecnici con strumenti riconosciuti del settore (ydata-profiling, Great Expectations, Fairlearn, AIF360, SHAP, LIME, ART, ecc.)
-4. Registrazione delle evidenze raccolte
-5. Reportistica con esito, livello di rischio e raccomandazioni
+- Completezza — identificazione e trattamento dei valori mancanti (inclusi placeholder non standard presenti nel dataset originale)
+- Duplicati e coerenza — controllo di righe duplicate e valori fuori range
+- Rappresentatività — distribuzione delle variabili sensibili (sesso, etnia) rispetto alla popolazione descritta
+- Sbilanciamento del target — distribuzione delle classi della variabile da predire
 
-## Contatti
+Strumenti impiegati: profiling automatico (fg-data-profiling), definizione e validazione di regole di qualità formali (Great Expectations), controlli manuali di verifica incrociata sui risultati automatici — inclusa verifica indipendente sul file sorgente grezzo, al di fuori di qualunque libreria di parsing.
 
-*(email / LinkedIn / sito web)*
+## Esito
+
+Nessuna anomalia bloccante (soglia di riferimento: 30% di missing su una singola colonna; massimo osservato 5,66%). Tre osservazioni non bloccanti:
+
+- 4.262 valori mancanti concentrati su 3 colonne (workclass, occupation, native-country) — severità bassa, gestibile in fase di modellazione.
+- 24 righe duplicate (0,07%) — severità bassa.
+- Rappresentatività demografica non uniforme su sesso ed etnia, con un divario di oltre 2,5 volte nel tasso di reddito elevato tra i gruppi (30,57% contro 10,95%) — severità media, raccomandato un Fairness Audit dedicato prima di qualunque utilizzo del modello in un contesto decisionale reale.
+
+## Contenuto della cartella
+
+| File | Descrizione |
+|---|---|
+| `Data-Quality-Report.pdf` | Report di sintesi con esito e raccomandazioni |
+| `data_quality_report.html` | Output tecnico del profiling automatico |
+| `Evidence-Register.xlsx` | Registro delle evidenze raccolte durante la verifica |
+| `Testing-Workpaper.xlsx` | Dettaglio dei singoli test eseguiti, popolazione coperta ed esito |

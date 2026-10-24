@@ -2,7 +2,7 @@
 
 Raccolta di case study su verifiche indipendenti di sistemi di intelligenza artificiale (data quality, fairness, explainability, robustness, documentazione), condotte secondo un metodo strutturato e allineato a EU AI Act (Reg. UE 2024/1689), NIST AI RMF e ISO/IEC 42001.
 
-Ogni case study è realizzato su modelli e dataset pubblici, a scopo dimostrativo del metodo. Per ciascuno sono disponibili i deliverable prodotti (report, registro delle evidenze, working paper di test e, quando emergono rilievi, registro dei rilievi), nello stesso formato usato in un incarico reale.
+Ogni case study è realizzato su dataset e modelli pubblici, oppure su modelli costruiti dall'auditor a partire da dati pubblici, a scopo dimostrativo del metodo. Per ciascuno sono disponibili i deliverable prodotti (report, registro delle evidenze, working paper di test e, quando emergono rilievi, registro dei rilievi), nello stesso formato usato in un incarico reale.
 
 > Il codice di analisi non è pubblicato in questo repository: fa parte del know-how professionale utilizzato per produrre i risultati. Ogni case study documenta comunque, in modo dettagliato, gli strumenti impiegati e il metodo seguito.
 

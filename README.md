@@ -18,7 +18,7 @@ Alessandro Littera, AI Auditor indipendente specializzato in conformità, govern
 | [Fairness Audit — COMPAS](./case-study-fairness-audit-compas) | Demographic Parity, Equalized Odds, tassi di errore e calibrazione per gruppo | COMPAS two-years (ProPublica) |
 | [Explainability Audit — Titanic](./case-study-explainability-audit-titanic) | Spiegabilità globale e locale (SHAP, LIME) | Titanic (Kaggle) |
 | [Robustness Audit — MNIST](./case-study-robustness-audit-mnist) | Robustezza a rumore e ad attacco avversariale (FGSM) | MNIST |
-| Bias & Robustness Audit NLP — DistilBERT *(in arrivo)* | Bias su gruppi demografici, stabilità a perturbazioni testuali | DistilBERT (sentiment analysis) |
+| [Bias & Robustness Audit NLP — DistilBERT](./case-study-bias-robustness-audit-distilbert) | Sensibilità a paesi e nomi, stabilità a refusi, maiuscole e negazione | DistilBERT (sentiment analysis) |
 | Audit end-to-end — German Credit *(in arrivo)* | Verifica completa multi-asse, simulazione di incarico reale | German Credit Dataset (Statlog) |
 
 ## Metodo
